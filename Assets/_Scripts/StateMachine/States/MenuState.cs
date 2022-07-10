@@ -1,25 +1,40 @@
-using FrogNinja.States;
 using UnityEngine;
 
-public class MenuState : BaseState
+namespace FrogNinja.States
 {
-    public MenuState(StateMachine stateMachine)
+    public class MenuState : BaseState
     {
-        Initialize(stateMachine);
-    }
-    public override void EnterState()
-    {
-        Debug.Log("MenuState entered");
-    }
+        public MenuState(StateMachine stateMachine)
+        {
+            Initialize(stateMachine);
+        }
+        public override void EnterState()
+        {
+            Debug.Log("MenuState entered");
 
-    public override void ExitState()
-    {
-        Debug.Log("Exit MenuState");
-    }
+            EventManager.EnterGameplay += EventManager_EnterGameplay;
+        }
 
-    public override void UpdateState()
-    {
-        Debug.Log("MenuState updated");
+        private void EventManager_EnterGameplay()
+        {
+            TransitionToGame();
+        }
+
+        public override void ExitState()
+        {
+            Debug.Log("Exit MenuState");
+
+            EventManager.EnterGameplay -= EventManager_EnterGameplay;
+        }
+
+        public override void UpdateState()
+        {
+            Debug.Log("MenuState updated");
+        }
+        private void TransitionToGame()
+        {
+            myStateMachine.EnterState(new GameState(myStateMachine));
+        }
     }
 }
 

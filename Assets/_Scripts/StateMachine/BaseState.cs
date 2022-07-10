@@ -8,7 +8,6 @@ namespace FrogNinja.States
         {
             myStateMachine = stateMachine;
         }
-
         public abstract void EnterState();
 
         public abstract void UpdateState();
