@@ -25,7 +25,6 @@ public class AnimationController : MonoBehaviour
     {
         playerAnimator.SetBool("isJumping", false);
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         playerAnimator.SetBool("isJumping", true);
