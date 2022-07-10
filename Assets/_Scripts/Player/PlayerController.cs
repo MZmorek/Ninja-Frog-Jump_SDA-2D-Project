@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float horizontalSpeed;
-    [SerializeField] Rigidbody2D playerRigidbody;
+    [SerializeField] private float horizontalSpeed;
+    [SerializeField] private Rigidbody2D playerRigidbody;
 
-    float horizontalInput;
-    Vector3 playerVelocity, screenPosition;
-    Camera mainCamera;
-    bool wrapScreen;
+    private float horizontalInput;
+    private Vector3 playerVelocity, screenPosition;
+    private Camera mainCamera;
+    private bool wrapScreen;
 
     void Start()
     {
@@ -20,13 +19,15 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
+
+        screenPosition = mainCamera.WorldToViewportPoint(transform.position);
+
         HandleScreenWrap();
+        GameOverConditions();
     }
 
     private void HandleScreenWrap()
     {
-        screenPosition = mainCamera.WorldToViewportPoint(transform.position);
-
         if (screenPosition.x < -0.03f)
         {
             screenPosition.x = 1.03f;
@@ -40,6 +41,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             wrapScreen = false;
+        }
+    }
+
+    private void GameOverConditions()
+    {
+        if (screenPosition.y < -0.08f)
+        {
+            SceneManager.LoadScene("SampleScene");
         }
     }
 
