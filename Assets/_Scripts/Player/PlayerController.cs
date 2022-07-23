@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
 
         screenPosition = mainCamera.WorldToViewportPoint(transform.position);
-
+        EventManager.OnUpdatePlayerPosition(transform.position);
         HandleScreenWrap();
         GameOverConditions();
     }
@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         if (screenPosition.y < -0.08f)
         {
+            EventManager.OnPlayerFallenOff();
             SceneManager.LoadScene("SampleScene");
         }
     }
