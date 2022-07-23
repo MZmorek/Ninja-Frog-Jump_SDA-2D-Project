@@ -6,6 +6,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] int positionDifferenceMultiplier = 100;
     private int currentScore;
     private int highScore;
+    public int CurrentScore { get { return currentScore; } }
+    public int HighScore { get { return highScore; } }
     private float maxPositionY;
     private bool firstUpdate = true;
 
