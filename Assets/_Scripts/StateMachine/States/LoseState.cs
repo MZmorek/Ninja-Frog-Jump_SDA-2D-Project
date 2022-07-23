@@ -13,11 +13,25 @@ namespace FrogNinja.States
         public override void EnterState()
         {
             UIManager.Instance.ShowGameOver();
+            EventManager.EnterGameplay += EventManager_EnterGameplay;
+            EventManager.EnterMenu += EventManager_EnterMenu;
+
         }
+        private void EventManager_EnterGameplay()
+        {
+            GoToGame();
+        }
+
+        private void EventManager_EnterMenu()
+        {
+            GoToMenu();
+        }
+
 
         public override void ExitState()
         {
-            
+            EventManager.EnterGameplay -= EventManager_EnterGameplay;
+            EventManager.EnterMenu -= EventManager_EnterMenu;
         }
 
         public override void UpdateState()
@@ -25,12 +39,12 @@ namespace FrogNinja.States
             
         }
 
-        private void TransitionToMenu()
+        private void GoToMenu()
         {
             myStateMachine.EnterState(new MenuState(myStateMachine));
         }
 
-        private void TransitionToGame()
+        private void GoToGame()
         {
             myStateMachine.EnterState(new GameState(myStateMachine));
         }

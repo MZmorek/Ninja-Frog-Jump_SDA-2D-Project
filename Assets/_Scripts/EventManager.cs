@@ -3,6 +3,7 @@ using UnityEngine;
 public static class EventManager
 {
     public static event System.Action EnterGameplay;
+    public static event System.Action EnterMenu;
     public static event System.Action<Vector2> PlayerPositionUpdate;
     public static event System.Action<int> CurrentScoreUpdated;
     public static event System.Action PlayerFallenOff;
@@ -22,6 +23,14 @@ public static class EventManager
             PlayerPositionUpdate(position);
         }
     }
+    public static void EnterMenuButton()
+    {
+        if (EnterMenu != null)
+        {
+            EnterMenu.Invoke();
+        }
+    }
+
 
     public static void OnUpdateScore(int score)
     {

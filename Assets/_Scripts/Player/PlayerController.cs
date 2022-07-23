@@ -1,4 +1,5 @@
 using UnityEngine;
+using FrogNinja.LevelGeneration;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,22 @@ public class PlayerController : MonoBehaviour
     private Vector3 screenPosition;
     private Camera mainCamera;
     private bool wrapScreen;
+    private bool active = false;
+
+    private void Awake()
+    {
+        LevelGenerator.LevelGenerated += LevelGenerator_LevelGenerated;
+    }
+
+    private void OnDestroy()
+    {
+        LevelGenerator.LevelGenerated -= LevelGenerator_LevelGenerated;
+    }
+
+    private void LevelGenerator_LevelGenerated(Vector3 obj)
+    {
+        transform.position = obj;
+    }
 
     void Start()
     {
@@ -18,6 +35,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!active)
+        {
+            return;
+        }
+
         horizontalInput = Input.GetAxis("Horizontal");
         
         EventManager.OnUpdatePlayerPosition(transform.position);
@@ -54,6 +76,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!active)
+        {
+            return;
+        }
         playerVelocity = playerRigidbody.velocity;
         playerVelocity.x = horizontalInput * horizontalSpeed;
         playerRigidbody.velocity = playerVelocity;
@@ -63,4 +89,15 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.MovePosition(Camera.main.ViewportToWorldPoint(screenPosition));
         }
     }
+
+    public void SwitchState(bool state)
+    {
+        active = state;
+
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.simulated = state;
+        }
+    }
+
 }

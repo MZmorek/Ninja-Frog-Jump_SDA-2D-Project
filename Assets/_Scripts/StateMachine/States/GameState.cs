@@ -6,6 +6,8 @@ namespace FrogNinja.States
 {
     public class GameState : BaseState
     {
+
+        PlayerController playerController;
         public GameState(StateMachine stateMachine)
         {
             Initialize(stateMachine);
@@ -14,12 +16,21 @@ namespace FrogNinja.States
         public override void EnterState()
         {
             Debug.Log("Enter GameState");
+
+            playerController = GameObject.FindObjectOfType<PlayerController>();
+            playerController.SwitchState(true);
+
             EventManager.PlayerFallenOff += EventManager_PlayerFallenOff;
             UIManager.Instance.ShowHUD();
         }
 
         public override void ExitState()
         {
+            if (playerController != null)
+            {
+                playerController.SwitchState(false);
+            }
+                
             Debug.Log("Exit GameState");
             EventManager.PlayerFallenOff -= EventManager_PlayerFallenOff;
         }
