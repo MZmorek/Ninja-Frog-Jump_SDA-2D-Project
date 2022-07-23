@@ -1,3 +1,6 @@
+using UnityEngine;
+using FrogNinja.UI;
+
 namespace FrogNinja.States
 {
     public class LoseState : BaseState
@@ -9,17 +12,17 @@ namespace FrogNinja.States
 
         public override void EnterState()
         {
-            throw new System.NotImplementedException();
+            UIManager.Instance.ShowGameOver();
         }
 
         public override void ExitState()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public override void UpdateState()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         private void TransitionToMenu()

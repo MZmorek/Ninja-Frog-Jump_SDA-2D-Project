@@ -1,5 +1,6 @@
 using UnityEngine;
 using FrogNinja.UI;
+using System;
 
 namespace FrogNinja.States
 {
@@ -13,12 +14,19 @@ namespace FrogNinja.States
         public override void EnterState()
         {
             Debug.Log("Enter GameState");
+            EventManager.PlayerFallenOff += EventManager_PlayerFallenOff;
             UIManager.Instance.ShowHUD();
         }
 
         public override void ExitState()
         {
             Debug.Log("Exit GameState");
+            EventManager.PlayerFallenOff -= EventManager_PlayerFallenOff;
+        }
+
+        private void EventManager_PlayerFallenOff()
+        {
+            GoToGameOver();
         }
 
         public override void UpdateState()
@@ -26,12 +34,12 @@ namespace FrogNinja.States
 
         }
 
-        private void TransitionToMenu()
+        private void GoToMenu()
         {
             myStateMachine.EnterState(new MenuState(myStateMachine));
         }
 
-        private void TransitionToLose()
+        private void GoToGameOver()
         {
             myStateMachine.EnterState(new LoseState(myStateMachine));
         }

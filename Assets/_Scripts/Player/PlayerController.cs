@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
         if (screenPosition.y < -0.08f)
         {
             EventManager.OnPlayerFallenOff();
-            SceneManager.LoadScene("SampleScene");
         }
     }
 

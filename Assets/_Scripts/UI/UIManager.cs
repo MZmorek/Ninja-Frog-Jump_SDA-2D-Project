@@ -8,6 +8,7 @@ namespace FrogNinja.UI
 
         [SerializeField] MainMenuWindow mainMenu;
         [SerializeField] HUDWindow hud;
+        [SerializeField] GameOverWindow gameOver;
 
         BaseWindow currentlyOpenWindow;
 
@@ -30,6 +31,10 @@ namespace FrogNinja.UI
         {
             HideAndSwitchWindow(hud);
         }
+        public void ShowGameOver()
+        {
+            HideAndSwitchWindow(gameOver);
+        }
 
         private void HideAndSwitchWindow(BaseWindow windowToSwitchTo)
         {
@@ -43,7 +48,7 @@ namespace FrogNinja.UI
 
         public void ShowFail()
         {
-
+            
         }
     }
 }
