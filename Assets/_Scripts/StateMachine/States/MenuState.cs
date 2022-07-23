@@ -1,3 +1,4 @@
+using FrogNinja.UI;
 using UnityEngine;
 
 namespace FrogNinja.States
@@ -11,8 +12,8 @@ namespace FrogNinja.States
         public override void EnterState()
         {
             Debug.Log("MenuState entered");
-
             EventManager.EnterGameplay += EventManager_EnterGameplay;
+            UIManager.Instance.ShowMainMenu();
         }
 
         private void EventManager_EnterGameplay()
@@ -29,7 +30,7 @@ namespace FrogNinja.States
 
         public override void UpdateState()
         {
-            Debug.Log("MenuState updated");
+
         }
         private void TransitionToGame()
         {

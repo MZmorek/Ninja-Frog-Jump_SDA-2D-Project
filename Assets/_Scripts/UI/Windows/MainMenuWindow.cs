@@ -6,7 +6,7 @@ namespace FrogNinja.UI
     {
         public void Button_PlayGame()
         {
-
+            EventManager.EnterGameplayButton();
         }
 
         public void Button_OpenSettings()
@@ -16,7 +16,7 @@ namespace FrogNinja.UI
 
         public void Button_ExitGame()
         {
-
+            Application.Quit();
         }
     }
 }

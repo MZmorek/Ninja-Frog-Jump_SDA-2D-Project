@@ -21,7 +21,7 @@ namespace FrogNinja.States
 
         public override void UpdateState()
         {
-            Debug.Log("Update GameState");
+
         }
 
         private void TransitionToMenu()
