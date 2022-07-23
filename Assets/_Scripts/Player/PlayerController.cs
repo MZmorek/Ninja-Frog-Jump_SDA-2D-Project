@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,8 +19,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-
-        screenPosition = mainCamera.WorldToViewportPoint(transform.position);
+        
         EventManager.OnUpdatePlayerPosition(transform.position);
         HandleScreenWrap();
         GameOverConditions();
@@ -29,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleScreenWrap()
     {
+        screenPosition = mainCamera.WorldToViewportPoint(transform.position);
         if (screenPosition.x < -0.03f)
         {
             screenPosition.x = 1.03f;
@@ -62,6 +61,6 @@ public class PlayerController : MonoBehaviour
         if (wrapScreen)
         {
             playerRigidbody.MovePosition(Camera.main.ViewportToWorldPoint(screenPosition));
-        }  
+        }
     }
 }
