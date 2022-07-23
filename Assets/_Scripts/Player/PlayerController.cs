@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D playerRigidbody;
 
     private float horizontalInput;
-    private Vector3 playerVelocity, screenPosition;
+    private Vector3 playerVelocity;
+    private Vector3 screenPosition;
     private Camera mainCamera;
     private bool wrapScreen;
 
@@ -59,6 +60,8 @@ public class PlayerController : MonoBehaviour
         playerRigidbody.velocity = playerVelocity;
 
         if (wrapScreen)
+        {
             playerRigidbody.MovePosition(Camera.main.ViewportToWorldPoint(screenPosition));
+        }  
     }
 }

@@ -16,7 +16,6 @@ namespace FrogNinja.Platforms
             {
                 return;
             }
-
             HandleCollision(collision);
         }
     }

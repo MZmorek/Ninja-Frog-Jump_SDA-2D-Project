@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace FrogNinja.CameraControls
 {
     [RequireComponent(typeof(Camera))]
@@ -16,12 +15,12 @@ namespace FrogNinja.CameraControls
 
         private void Update()
         {
-            if(playerCharacter.transform.position.y > myPosition.y)
+            if (playerCharacter.transform.position.y > myPosition.y)
             {
                 myPosition.y = playerCharacter.transform.position.y;
                 transform.position = myPosition;
             }
-            
+
         }
     }
 }
