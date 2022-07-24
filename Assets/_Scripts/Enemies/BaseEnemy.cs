@@ -24,8 +24,9 @@ namespace FrogNinja.Enemies
             }
             if (collision.rigidbody.GetComponent<PlayerBullet>() != null)
             {
-                enemySprite.enabled = false;
-                collision.collider.enabled = false;
+                enemyRigidbody.gameObject.SetActive(false);
+                EventManager.OnEnemyDied();
+
             }
         }
 

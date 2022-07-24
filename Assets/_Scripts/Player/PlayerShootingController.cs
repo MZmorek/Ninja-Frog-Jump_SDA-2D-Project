@@ -8,10 +8,12 @@ namespace FrogNinja.Player
         [SerializeField] private PlayerBullet bulletPrefab;
         [SerializeField] private Rigidbody2D playerRigidbody;
         private PlayerController playerController;
+        private Camera mainCamera;
 
         private void Awake()
         {
             playerController = GetComponent<PlayerController>();
+            mainCamera = Camera.main;
         }
 
         private void Update()
@@ -33,7 +35,11 @@ namespace FrogNinja.Player
 
             Vector3 direction = Vector3.up;
 
-            spawnedBullet.Shoot(direction);
+            Vector3 worldMousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            worldMousePosition.z = transform.position.z;
+
+            direction = worldMousePosition - transform.position;
+            spawnedBullet.Shoot(direction.normalized);
         }
     }
 }
