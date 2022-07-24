@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   bulletRigidbody: {fileID: 6313102965421668878}
+  impactSound: {fileID: 8300000, guid: 96a3ccb6c7204f941bc52db8c3484fdf, type: 3}
 --- !u!50 &6313102965421668878
 Rigidbody2D:
   serializedVersion: 4

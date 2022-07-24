@@ -7,6 +7,7 @@ namespace FrogNinja.Player
     {
         [SerializeField] private PlayerBullet bulletPrefab;
         [SerializeField] private Rigidbody2D playerRigidbody;
+        [SerializeField] private AudioClip shootingSound;
         private PlayerController playerController;
         private Camera mainCamera;
 
@@ -35,11 +36,14 @@ namespace FrogNinja.Player
 
             Vector3 direction = Vector3.up;
 
+            AudioSystem.PlaySFX_Global(shootingSound);
+
             Vector3 worldMousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             worldMousePosition.z = transform.position.z;
 
             direction = worldMousePosition - transform.position;
             spawnedBullet.Shoot(direction.normalized);
+            
         }
     }
 }

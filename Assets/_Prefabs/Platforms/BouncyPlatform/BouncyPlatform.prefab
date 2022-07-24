@@ -164,4 +164,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d0c0058ab398c458c4be8ca6d22962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceSound: {fileID: 8300000, guid: c94c0b8a6d6035a4d9329e3bb4ec6298, type: 3}
   bounceForce: 10

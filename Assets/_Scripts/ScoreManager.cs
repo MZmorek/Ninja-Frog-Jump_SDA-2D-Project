@@ -4,6 +4,7 @@ public class ScoreManager : MonoBehaviour
 {
     private const string HIGH_SCORE_KEY = "high_score";
     [SerializeField] int positionDifferenceMultiplier = 100;
+    [SerializeField] AudioClip highScoreSFX;
     private int currentScore;
     private int highScore;
     public int CurrentScore { get { return currentScore; } }
@@ -16,14 +17,14 @@ public class ScoreManager : MonoBehaviour
         highScore = PlayerPrefs.GetInt(HIGH_SCORE_KEY, 0);
         EventManager.EnterGameplay += EventManager_EnterGameplay;
         EventManager.PlayerPositionUpdate += EventManager_PlayerPositionUpdate;
-        EventManager.PlayerDied += EventManager_PlayerFallenOff;
+        EventManager.PlayerDied += EventManager_PlayerDied;
     }
 
     private void OnDestroy()
     {
         EventManager.PlayerPositionUpdate -= EventManager_PlayerPositionUpdate;
         EventManager.EnterGameplay -= EventManager_EnterGameplay;
-        EventManager.PlayerDied -= EventManager_PlayerFallenOff;
+        EventManager.PlayerDied -= EventManager_PlayerDied;
 
     }
     private void EventManager_EnterGameplay()
@@ -52,7 +53,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    private void EventManager_PlayerFallenOff()
+    private void EventManager_PlayerDied()
     {
         SaveHighScore();
     }
@@ -63,6 +64,12 @@ public class ScoreManager : MonoBehaviour
         {
             PlayerPrefs.SetInt(HIGH_SCORE_KEY, currentScore);
             highScore = currentScore;
+
+            Invoke("PlayJingle", 1.5f);
         }
+    }
+    private void PlayJingle()
+    {
+        AudioSystem.PlaySFX_Global(highScoreSFX);
     }
 }

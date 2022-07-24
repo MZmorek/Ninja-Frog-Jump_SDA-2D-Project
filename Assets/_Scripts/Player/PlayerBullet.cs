@@ -6,6 +6,8 @@ namespace FrogNinja.Player
     {
         [SerializeField] private float speed;
         [SerializeField] private Rigidbody2D bulletRigidbody;
+        [SerializeField] private AudioClip impactSound;
+
         private Vector3 direction = Vector3.zero;
 
         public void Shoot(Vector3 newDirection)
@@ -23,7 +25,11 @@ namespace FrogNinja.Player
         {
             Destroy(gameObject);
         }
-            
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            Die();
+            AudioSystem.PlaySFX_Global(impactSound);
+        }
     }
 }
 
