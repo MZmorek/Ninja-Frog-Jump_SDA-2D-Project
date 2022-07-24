@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using FrogNinja.Player;
 using UnityEngine;
 
 namespace FrogNinja.Enemies
@@ -23,7 +22,11 @@ namespace FrogNinja.Enemies
             {
                 EventManager.OnEnemyHitPlayer();
             }
-            
+            if (collision.rigidbody.GetComponent<PlayerBullet>() != null)
+            {
+                enemySprite.enabled = false;
+                collision.collider.enabled = false;
+            }
         }
 
         protected abstract void Move();

@@ -2035,6 +2035,7 @@ GameObject:
   - component: {fileID: 1308352567}
   - component: {fileID: 1308352572}
   - component: {fileID: 1308352573}
+  - component: {fileID: 1308352574}
   m_Layer: 7
   m_Name: Ninja Frog
   m_TagString: Player
@@ -2142,7 +2143,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 2
   m_Sprite: {fileID: 4278371960119211202, guid: cd947491a13509945aa1b644f9db3ef2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2201,6 +2202,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 1308352572}
   playerSprite: {fileID: 1308352570}
+  playerRigidbody: {fileID: 1308352568}
+--- !u!114 &1308352574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308352566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2248086897e304dbea00e63246027b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2248787975639663685, guid: ad84627c025a67b4884c04f62f8bdef9, type: 3}
   playerRigidbody: {fileID: 1308352568}
 --- !u!1 &1321261307
 GameObject:

@@ -1,8 +1,6 @@
-using UnityEngine;
 using FrogNinja.LevelGeneration;
-using System.Collections;
-using System.Collections.Generic;
-
+using FrogNinja.Player;
+using UnityEngine;
 
 namespace FrogNinja.CameraControls
 {

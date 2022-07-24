@@ -1,5 +1,5 @@
+using FrogNinja.Player;
 using FrogNinja.UI;
-using System;
 using UnityEngine;
 
 namespace FrogNinja.States
