@@ -18,7 +18,7 @@ namespace FrogNinja.States
 
         private void EventManager_EnterGameplay()
         {
-            TransitionToGame();
+            GoToGame();
         }
 
         public override void ExitState()
@@ -32,7 +32,7 @@ namespace FrogNinja.States
         {
 
         }
-        private void TransitionToGame()
+        private void GoToGame()
         {
             myStateMachine.EnterState(new GameState(myStateMachine));
         }

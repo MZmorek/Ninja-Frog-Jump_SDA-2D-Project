@@ -8,6 +8,7 @@ namespace FrogNinja.Player
     {
         [SerializeField] private float horizontalSpeed;
         [SerializeField] private Rigidbody2D playerRigidbody;
+        public bool IsActive { get { return active; } }
 
         private float horizontalInput;
         private Vector3 playerVelocity;

@@ -1,32 +1,43 @@
 using UnityEngine;
-
-public class AnimationController : MonoBehaviour
+namespace FrogNinja.Player
 {
-    public Animator playerAnimator;
-    public SpriteRenderer playerSprite;
-    public Rigidbody2D playerRigidbody;
-
-    bool flipSprite = false;
-
-    private void Update()
+    public class AnimationController : MonoBehaviour
     {
-        if (Input.GetAxisRaw("Horizontal") == -1)
+        public Animator playerAnimator;
+        public SpriteRenderer playerSprite;
+        public Rigidbody2D playerRigidbody;
+
+        private bool flipSprite = false;
+        private PlayerController playerController;
+
+        private void Awake()
         {
-            flipSprite = true;
+            playerController = GetComponent<PlayerController>();
         }
-        else if (Input.GetAxisRaw("Horizontal") == 1)
+        private void Update()
         {
-            flipSprite = false;
-        }
+            if (!playerController.IsActive)
+            {
+                return;
+            }
+            if (Input.GetAxisRaw("Horizontal") == -1)
+            {
+                flipSprite = true;
+            }
+            else if (Input.GetAxisRaw("Horizontal") == 1)
+            {
+                flipSprite = false;
+            }
 
-        playerSprite.flipX = flipSprite;
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        playerAnimator.SetBool("isJumping", false);
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        playerAnimator.SetBool("isJumping", true);
+            playerSprite.flipX = flipSprite;
+        }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            playerAnimator.SetBool("isJumping", false);
+        }
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            playerAnimator.SetBool("isJumping", true);
+        }
     }
 }
