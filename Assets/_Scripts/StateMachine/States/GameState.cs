@@ -1,6 +1,6 @@
-using UnityEngine;
 using FrogNinja.UI;
 using System;
+using UnityEngine;
 
 namespace FrogNinja.States
 {
@@ -20,8 +20,14 @@ namespace FrogNinja.States
             playerController = GameObject.FindObjectOfType<PlayerController>();
             playerController.SwitchState(true);
 
-            EventManager.PlayerFallenOff += EventManager_PlayerFallenOff;
+            EventManager.PlayerDied += EventManager_PlayerDied;
+            EventManager.EnemyHitPlayer += EventManager_EnemyHitPlayer;
             UIManager.Instance.ShowHUD();
+        }
+
+        private void EventManager_EnemyHitPlayer()
+        {
+            EventManager.OnPlayerDied();
         }
 
         public override void ExitState()
@@ -30,12 +36,13 @@ namespace FrogNinja.States
             {
                 playerController.SwitchState(false);
             }
-                
+
             Debug.Log("Exit GameState");
-            EventManager.PlayerFallenOff -= EventManager_PlayerFallenOff;
+            EventManager.PlayerDied -= EventManager_PlayerDied;
+            EventManager.EnemyHitPlayer -= EventManager_EnemyHitPlayer;
         }
 
-        private void EventManager_PlayerFallenOff()
+        private void EventManager_PlayerDied()
         {
             GoToGameOver();
         }

@@ -32,7 +32,7 @@ namespace FrogNinja.LevelGeneration
         {
             EventManager.EnterGameplay -= EventManager_EnterGameplay;
             EventManager.PlayerPositionUpdate -= EventManager_PlayerPositionUpdate;
-            EventManager.PlayerFallenOff -= EventManager_PlayerFallenOff;
+            EventManager.PlayerDied -= EventManager_PlayerFallenOff;
         }
 
         private void EventManager_EnterGameplay()
@@ -45,13 +45,13 @@ namespace FrogNinja.LevelGeneration
             }
 
             EventManager.PlayerPositionUpdate += EventManager_PlayerPositionUpdate;
-            EventManager.PlayerFallenOff += EventManager_PlayerFallenOff;
+            EventManager.PlayerDied += EventManager_PlayerFallenOff;
         }
 
         private void EventManager_PlayerFallenOff()
         {
             EventManager.PlayerPositionUpdate -= EventManager_PlayerPositionUpdate;
-            EventManager.PlayerFallenOff -= EventManager_PlayerFallenOff;
+            EventManager.PlayerDied -= EventManager_PlayerFallenOff;
         }
 
         private void EventManager_PlayerPositionUpdate(Vector2 obj)
