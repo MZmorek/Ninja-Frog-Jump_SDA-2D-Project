@@ -8,6 +8,7 @@ namespace FrogNinja.Player
     {
         [SerializeField] private float horizontalSpeed;
         [SerializeField] private Rigidbody2D playerRigidbody;
+        [SerializeField] AudioClip lossSFX;
         public bool IsActive { get { return active; } }
 
         private float horizontalInput;
@@ -94,13 +95,18 @@ namespace FrogNinja.Player
             }
         }
 
-        public void SwitchState(bool state)
+        public void SwitchState(bool state, bool playSFX = true)
         {
             active = state;
 
             if (playerRigidbody != null)
             {
                 playerRigidbody.simulated = state;
+            }
+
+            if (!state && playSFX)
+            {
+                AudioSystem.PlaySFX_Global(lossSFX);
             }
         }
     }

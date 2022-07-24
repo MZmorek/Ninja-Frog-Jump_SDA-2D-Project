@@ -1,5 +1,6 @@
 using FrogNinja.Player;
 using FrogNinja.UI;
+using System;
 using UnityEngine;
 
 namespace FrogNinja.States
@@ -8,6 +9,8 @@ namespace FrogNinja.States
     {
 
         PlayerController playerController;
+
+        private bool gamePaused = false;
         public GameState(StateMachine stateMachine)
         {
             Initialize(stateMachine);
@@ -15,14 +18,42 @@ namespace FrogNinja.States
 
         public override void EnterState()
         {
-            Debug.Log("Enter GameState");
-
             playerController = GameObject.FindObjectOfType<PlayerController>();
             playerController.SwitchState(true);
 
+            AudioSystem.SwitchMusic_Global(true);
+
             EventManager.PlayerDied += EventManager_PlayerDied;
             EventManager.EnemyHitPlayer += EventManager_EnemyHitPlayer;
+            EventManager.EnterPause += EventManager_EnterPause;
             UIManager.Instance.ShowHUD();
+        }
+
+        private void EventManager_EnterPause()
+        {
+            PauseGame();
+        }
+
+        private void PauseGame()
+        {
+            gamePaused = !gamePaused;
+
+            EventManager.OnPause(gamePaused);
+
+            if (gamePaused)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+
+            playerController.SwitchState(!gamePaused, false);
+
+            AudioSystem.PlayPauseSFX_Global(gamePaused);
+            AudioSystem.SwitchMusic_Global(!gamePaused);
+
         }
 
         private void EventManager_EnemyHitPlayer()
@@ -37,9 +68,11 @@ namespace FrogNinja.States
                 playerController.SwitchState(false);
             }
 
-            Debug.Log("Exit GameState");
             EventManager.PlayerDied -= EventManager_PlayerDied;
             EventManager.EnemyHitPlayer -= EventManager_EnemyHitPlayer;
+            EventManager.EnterPause -= EventManager_EnterPause;
+
+            AudioSystem.SwitchMusic_Global(false);
         }
 
         private void EventManager_PlayerDied()
@@ -49,7 +82,10 @@ namespace FrogNinja.States
 
         public override void UpdateState()
         {
-
+            if (Input.GetKeyUp(KeyCode.P))
+            {
+                PauseGame();
+            }
         }
 
         private void GoToMenu()

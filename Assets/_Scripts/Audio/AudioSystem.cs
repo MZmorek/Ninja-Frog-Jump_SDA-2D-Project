@@ -24,12 +24,47 @@ public class AudioSystem : MonoBehaviour
 
         Instance.PlaySFX_Local(Instance.buttonSFX);
     }
+    public static void SwitchMusic_Global(bool play)
+    {
+        if (Instance == null)
+        {
+            return;
+        }
+        if (!play)
+        {
+            Instance.musicSource.Pause();
+        }
+        else if (!Instance.musicSource.isPlaying)
+        {
+            Instance.musicSource.Play();
+        }
+    }
+
+    public static void PlayPauseSFX_Global(bool pause)
+    {
+        if (Instance == null)
+            return;
+
+        if (pause)
+        {
+            Instance.sfxSource.PlayOneShot(Instance.pauseSFX);
+        }
+        else
+        {
+            Instance.sfxSource.PlayOneShot(Instance.unpauseSFX);
+        }
+
+    }
+
     #endregion
 
     #region Local
 
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip buttonSFX;
+    [SerializeField] private AudioClip pauseSFX;
+    [SerializeField] private AudioClip unpauseSFX;
     private void Awake()
     {
         if (Instance == null)
