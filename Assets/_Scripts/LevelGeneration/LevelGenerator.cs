@@ -1,3 +1,4 @@
+using FrogNinja.Enemies;
 using FrogNinja.LevelGeneration.Configs;
 using FrogNinja.Platforms;
 using System.Collections.Generic;
@@ -10,17 +11,22 @@ namespace FrogNinja.LevelGeneration
         public static event System.Action<Vector3> LevelGenerated;
 
         [SerializeField] private List<PlatformConfiguration> platformConfigurations;
+        [SerializeField] private List<BaseEnemy> enemies;
         [SerializeField] private Transform playerSpawnPosition;
         [SerializeField] Vector2 minMaxVariation = new Vector2(0f, 1f);
+        [SerializeField] private float minDistanceToSpawnEnemy;
         [SerializeField] int maxCountOfTheSamePlatformInRow = 1;
 
         private List<BasePlatform> spawnedPlatforms = new List<BasePlatform>();
+
+        private List<BaseEnemy> spawnedEnemies = new List<BaseEnemy>();
 
         private BasePlatform lastSpawnedPlatform;
         private int samePlatformInRow = 0;
 
         private float lastSpawnedY;
         private Camera mainCamera;
+        private bool enableEnemySpawn;
 
         private void Awake()
         {
@@ -37,7 +43,9 @@ namespace FrogNinja.LevelGeneration
 
         private void EventManager_EnterGameplay()
         {
+            enableEnemySpawn = false;
             CreateLevel();
+            enableEnemySpawn = true;
 
             if (LevelGenerated != null)
             {
@@ -68,7 +76,7 @@ namespace FrogNinja.LevelGeneration
 
             lastSpawnedY = playerSpawnPosition.position.y;
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 20; i++)
             {
                 SpawnPlatform();
             }
@@ -84,8 +92,33 @@ namespace FrogNinja.LevelGeneration
 
                 spawnedPlatforms.Clear();
             }
-        }
+            if (spawnedEnemies.Count > 0)
+            {
+                for (int i = 0; i < spawnedEnemies.Count; i++)
+                {
+                    Destroy(spawnedEnemies[i].gameObject);
+                }
 
+                spawnedEnemies.Clear();
+            }
+        }
+        private void SpawnEnemyIfAvailable(float lastY, float currentY)
+        {
+            if (!enableEnemySpawn)
+            {
+                return;
+            }
+            float difference = currentY - lastY;
+
+            if (difference > minDistanceToSpawnEnemy)
+            {
+                Vector2 spawnPosition = new Vector2(GetRandomXPosition(), lastY + (difference / 2));
+
+                BaseEnemy enemyToSpawn = enemies[Random.Range(0, enemies.Count)];
+
+                BaseEnemy spawnedEnemy = GameObject.Instantiate<BaseEnemy>(enemyToSpawn, spawnPosition, Quaternion.identity, transform);
+            }
+        }
 
         private void SpawnPlatform()
         {
@@ -95,6 +128,8 @@ namespace FrogNinja.LevelGeneration
             BasePlatform spawnedPlatform = GameObject.Instantiate<BasePlatform>(platformToSpawn, spawnPosition, Quaternion.identity, transform);
 
             spawnedPlatforms.Add(spawnedPlatform);
+
+            SpawnEnemyIfAvailable(lastSpawnedY, spawnPosition.y);
 
             lastSpawnedY = spawnPosition.y;
         }
