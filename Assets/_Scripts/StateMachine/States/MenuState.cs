@@ -1,5 +1,4 @@
 using FrogNinja.UI;
-using System;
 using UnityEngine;
 
 namespace FrogNinja.States
@@ -14,16 +13,7 @@ namespace FrogNinja.States
         {
             AudioSystem.SwitchMusic_Global(true);
             EventManager.EnterGameplay += EventManager_EnterGameplay;
-            EventManager.EnterPause += EventManager_EnterPause;
             UIManager.Instance.ShowMainMenu();
-        }
-
-        private void EventManager_EnterPause()
-        {
-            if (Input.GetKey(KeyCode.P))
-            {
-                Time.timeScale = 0;
-            }
         }
 
         private void EventManager_EnterGameplay()
