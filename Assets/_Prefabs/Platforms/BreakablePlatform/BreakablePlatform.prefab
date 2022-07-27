@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceSound: {fileID: 8300000, guid: 985e3952819a8cf48ac55383180c7f04, type: 3}
-  mySprite: {fileID: 3480725596451983381}
+  platformSprite: {fileID: 3480725596451983381}

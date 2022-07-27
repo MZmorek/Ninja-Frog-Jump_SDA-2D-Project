@@ -4,11 +4,11 @@ namespace FrogNinja.Platforms
 {
     public class BreakablePlatform : BasePlatform
     {
-        [SerializeField] private SpriteRenderer mySprite;
+        [SerializeField] private SpriteRenderer platformSprite;
         protected override void HandleCollision(Collision2D collision)
         {
             collision.otherCollider.enabled = false;
-            mySprite.enabled = false;
+            platformSprite.enabled = false;
         }
     }
 }
