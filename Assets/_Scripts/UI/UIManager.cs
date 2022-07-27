@@ -7,6 +7,7 @@ namespace FrogNinja.UI
         public static UIManager Instance;
 
         [SerializeField] MainMenuWindow mainMenu;
+        //[SerializeField] SettingsWindow settings;
         [SerializeField] HUDWindow hud;
         [SerializeField] GameOverWindow gameOver;
         [SerializeField] PauseWindow pause;
@@ -27,6 +28,10 @@ namespace FrogNinja.UI
         {
             HideAndSwitchWindow(mainMenu);
         }
+        //public void ShowSettings()
+        //{
+        //    HideAndSwitchWindow(settings);
+        //}
 
         public void ShowHUD()
         {
@@ -50,11 +55,6 @@ namespace FrogNinja.UI
             }
             currentlyOpenWindow = windowToSwitchTo;
             currentlyOpenWindow.ShowWindow();
-        }
-
-        public void ShowFail()
-        {
-            
         }
     }
 }
