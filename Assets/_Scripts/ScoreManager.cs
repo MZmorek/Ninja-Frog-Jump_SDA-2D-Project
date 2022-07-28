@@ -18,6 +18,7 @@ public class ScoreManager : MonoBehaviour
         EventManager.EnterGameplay += EventManager_EnterGameplay;
         EventManager.PlayerPositionUpdate += EventManager_PlayerPositionUpdate;
         EventManager.PlayerDied += EventManager_PlayerDied;
+        EventManager.EnemyDied += EventManager_EnemyDied;
     }
 
     private void OnDestroy()
@@ -25,13 +26,20 @@ public class ScoreManager : MonoBehaviour
         EventManager.PlayerPositionUpdate -= EventManager_PlayerPositionUpdate;
         EventManager.EnterGameplay -= EventManager_EnterGameplay;
         EventManager.PlayerDied -= EventManager_PlayerDied;
-
+        EventManager.EnemyDied -= EventManager_EnemyDied;
     }
     private void EventManager_EnterGameplay()
     {
         firstUpdate = true;
         currentScore = 0;
     }
+
+    private void EventManager_EnemyDied()
+    {
+        currentScore += 150;
+        EventManager.OnUpdateScore(currentScore);
+    }
+
     private void EventManager_PlayerPositionUpdate(Vector2 obj)
     {
         if (firstUpdate == true)
@@ -73,3 +81,4 @@ public class ScoreManager : MonoBehaviour
         AudioSystem.PlaySFX_Global(highScoreSFX);
     }
 }
+

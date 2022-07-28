@@ -1,6 +1,5 @@
 using FrogNinja.Player;
 using UnityEngine;
-
 namespace FrogNinja.Enemies
 {
     public abstract class BaseEnemy : MonoBehaviour
@@ -11,6 +10,7 @@ namespace FrogNinja.Enemies
 
         [SerializeField] protected SpriteRenderer enemySprite;
 
+        
         protected virtual void FixedUpdate()
         {
             Move();
@@ -26,7 +26,6 @@ namespace FrogNinja.Enemies
             {
                 enemyRigidbody.gameObject.SetActive(false);
                 EventManager.OnEnemyDied();
-
             }
         }
 

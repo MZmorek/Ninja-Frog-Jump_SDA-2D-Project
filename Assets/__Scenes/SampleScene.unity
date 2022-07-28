@@ -5400,7 +5400,7 @@ MonoBehaviour:
   - {fileID: 5615064270913171757, guid: 92a41c1dc4e1d8b4dac1bffbe5b071c5, type: 3}
   playerSpawnPosition: {fileID: 237872340}
   minMaxVariation: {x: 0, y: 1}
-  minDistanceToSpawnEnemy: 1.5
+  minDistanceToSpawnEnemy: 1.7
   maxCountOfTheSamePlatformInRow: 1
 --- !u!1 &2087798584
 GameObject:

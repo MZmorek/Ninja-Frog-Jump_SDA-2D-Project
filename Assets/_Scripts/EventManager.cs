@@ -42,6 +42,7 @@ public static class EventManager
     #region Player Events
     public static event System.Action<Vector2> PlayerPositionUpdate;
     public static event System.Action PlayerDied;
+
     public static void OnUpdatePlayerPosition(Vector2 position)
     {
         if (PlayerPositionUpdate != null)
@@ -59,6 +60,7 @@ public static class EventManager
     #endregion
 
     #region Score Events
+
     public static event System.Action<int> CurrentScoreUpdated;
     public static void OnUpdateScore(int score)
     {
@@ -71,6 +73,7 @@ public static class EventManager
     #endregion
 
     #region Enemy Events
+
     public static event System.Action EnemyHitPlayer;
     public static event System.Action EnemyDied;
 
