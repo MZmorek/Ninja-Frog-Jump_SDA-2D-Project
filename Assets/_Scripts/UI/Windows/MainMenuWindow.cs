@@ -11,7 +11,7 @@ namespace FrogNinja.UI
 
         public void Button_OpenSettings()
         {
-
+            EventManager.EnterSettingsButton();
         }
 
         public void Button_ExitGame()

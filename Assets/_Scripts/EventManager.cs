@@ -4,8 +4,9 @@ public static class EventManager
 {
     #region Button Events
     public static event System.Action EnterGameplay;
-    public static event System.Action EnterMenu;
-    public static event System.Action EnterPause;
+    public static event System.Action EnterMenu; 
+    public static event System.Action EnterSettings;
+    public static event System.Action EnterPause; 
 
     public static void EnterMenuButton()
     {
@@ -19,6 +20,13 @@ public static class EventManager
         if (EnterGameplay != null)
         {
             EnterGameplay.Invoke();
+        }
+    }
+    public static void EnterSettingsButton()
+    {
+        if (EnterSettings != null)
+        {
+            EnterSettings.Invoke();
         }
     }
 

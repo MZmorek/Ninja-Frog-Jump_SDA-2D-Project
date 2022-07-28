@@ -1,4 +1,5 @@
 using FrogNinja.UI;
+using System;
 using UnityEngine;
 
 namespace FrogNinja.States
@@ -13,7 +14,13 @@ namespace FrogNinja.States
         {
             AudioSystem.SwitchMusic_Global(true);
             EventManager.EnterGameplay += EventManager_EnterGameplay;
+            EventManager.EnterSettings += EventManager_EnterSettings;
             UIManager.Instance.ShowMainMenu();
+        }
+
+        private void EventManager_EnterSettings()
+        {
+            GoToSettings();
         }
 
         private void EventManager_EnterGameplay()
@@ -26,6 +33,7 @@ namespace FrogNinja.States
             Debug.Log("Exit MenuState");
 
             EventManager.EnterGameplay -= EventManager_EnterGameplay;
+            EventManager.EnterSettings -= EventManager_EnterSettings;
         }
 
         public override void UpdateState()
@@ -35,6 +43,10 @@ namespace FrogNinja.States
         private void GoToGame()
         {
             myStateMachine.EnterState(new GameState(myStateMachine));
+        }
+        private void GoToSettings()
+        {
+            myStateMachine.EnterState(new SettingsState(myStateMachine));
         }
     }
 }
